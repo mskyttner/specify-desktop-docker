@@ -1,0 +1,28 @@
+version: '2'
+
+services:
+
+  fs:
+    image: tianon/true
+    volumes:      
+      - /tmp/.X11-unix/X0:/tmp/.X11-unix/X0
+  
+  db:
+    image: mysql:5.7
+    env_file: .env
+    volumes:
+      - ./s6init.sql:/docker-entrypoint-initdb.d/s6init.sql
+      - ./data.sql:/tmp/data.sql
+      - ./create_schema.sh:/docker-entrypoint-initdb.d/create_schema.sh
+    ports:
+      - 3306:3306
+
+  ui:
+    image: dina/specify-desktop:v6
+    command: Specify
+    environment:
+      - DISPLAY=$DISPLAY
+    volumes_from:
+      - fs
+    links:
+      - db
