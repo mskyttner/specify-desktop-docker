@@ -20,7 +20,7 @@ Use "make up" to bring up the services.
 
 In Specify 6 GUI, use the relevant user/pass credentials pair at the first login...
 
-Determine the user/pass credentials by "make get<TAB>", ie the "get-s6-login" target in the Makefile...
+Determine the user/pass credentials by "make get-s6-login" target in the Makefile...
 
 Then use "db" for the database server name, "specify6" for the database name and "ben" for the master user, unless you have other settings in your .env-file and in the s6init.sql file...
 
@@ -28,9 +28,17 @@ Then use "db" for the database server name, "specify6" for the database name and
 
 Run "export $(cat .env | xargs) > /dev/null" and your Makefile will be aware of environment settings in the .env-file...
 
+The db dump takes a while to load, patience please! In other words, the initial start of the db needs to complete before the ui starts, can be fixed with "wait-for-it.sh" or equiv.
+
+In Specify6, on the first run use "demouser", "demouser" for user/pass credentials and a schema upgrade will run which takes some time, patience please!
+
 ## TODO
 
-Add mysql_config_edotr stuff from here:
+Add mysql_config_editor stuff from here:
 
 http://stackoverflow.com/questions/20751352/suppress-warning-messages-using-mysql-from-within-terminal-but-password-written/22933056#22933056
+
+## ISSUES
+
+Clicking the "LifeMapper" button gives an error like "javax.media.opengl.GLException: Profiles [GL4bc, GL3bc, GL2, GLES1] not available on device null", no workaround found for that yet (didn't look either).
 
