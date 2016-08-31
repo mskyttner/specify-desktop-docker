@@ -5,4 +5,6 @@ RUN chmod +x Specify_unix_64.sh
 # run the installer quietly, using defaults, with progress logged to console
 RUN ./Specify_unix_64.sh -q -console
 RUN rm ./Specify_unix_64.sh
+RUN apt-get update
+RUN apt-get install libxxf86vm1
 CMD ["Specify"]
