@@ -1,17 +1,19 @@
 PWD := $(shell pwd)
 NAME := dina/specify-desktop:v6
 XSOCK := /tmp/.X11-unix/X0
-SRC_DATA :=  http://archive.org/download/dw-collectionsdata/dina_web.sql.gz
+#SRC_DATA :=  http://archive.org/download/dw-collectionsdata/dina_web.sql.gz
+SRC_DATA := https://github.com/DINA-Web/datasets/blob/master/specify/DemoDatawImages.sql.gz?raw=true
 SRC_SW := http://update.specifysoftware.org/Specify_unix_64.sh
 
-all: build up
+all: clean init build up
+.PHONY: all
 
 init:
 	@echo "Caching downloads locally..."
 	@test -f Specify_unix_64.sh || \
 		(wget $(SRC_SW) && chmod +x Specify_unix_64.sh)
 
-	@echo "Caching db dump from IA..."
+	@echo "Caching db dump locally..."
 	@test -f data.sql || \
 		(curl --progress-bar -L $(SRC_DATA) -o data.sql.gz && \
 		gunzip data.sql.gz)
@@ -32,6 +34,10 @@ up:
 	@echo "Launching Specify 6 UI"
 	xhost +local:
 	docker-compose up ui
+
+get-db-shell:
+	@docker exec -it specifydesktopdocker_db_1 \
+		sh -c "mysql -u root -p$(MYSQL_ROOT_PASSWORD) -D$(MYSQL_DATABASE)"
 
 get-s6-login:
 	@echo "Getting Specify 6 username from db... did you export the .env?"
