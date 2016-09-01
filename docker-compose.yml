@@ -17,6 +17,9 @@ services:
     ports:
       - 3306:3306
 
+  media:
+    image: dina/media
+
   ui:
     image: dina/specify-desktop:v6
     command: Specify
@@ -26,3 +29,5 @@ services:
       - fs
     links:
       - db
+      - media
+
