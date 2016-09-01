@@ -13,10 +13,13 @@ init:
 	@test -f Specify_unix_64.sh || \
 		(wget $(SRC_SW) && chmod +x Specify_unix_64.sh)
 
-	@echo "Caching db dump locally..."
 	@test -f data.sql || \
 		(curl --progress-bar -L $(SRC_DATA) -o data.sql.gz && \
 		gunzip data.sql.gz)
+
+	@test -f wait-for-it.sh || \
+		(wget https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh && \
+		chmod +x wait-for-it.sh)
 
 build:
 	@docker build --tag $(NAME) .
@@ -28,10 +31,11 @@ debug:
 		dina/specify-desktop:v6
 
 up:
-	@echo "Launching Specify db"
+	@echo "Launching services"
 	docker-compose up -d db
+	docker-compose up -d media
 
-	@echo "Launching Specify 6 UI"
+	@echo "Launching GUI"
 	xhost +local:
 	docker-compose up ui
 
