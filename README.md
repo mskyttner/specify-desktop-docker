@@ -34,6 +34,10 @@ In Specify6, on the first run use "demouser", "demouser" for user/pass credentia
 
 ## TODO
 
+- Add database dump and load to Makefile
+- Reconfigure web-asset-server to NOT refer to localhost (should use "media" ie the name from docker-compose.yml)
+- Find where Global Prefs are stored (would allow preconfig of asset server without any manual steps)
+
 Add mysql_config_editor stuff from here:
 
 http://stackoverflow.com/questions/20751352/suppress-warning-messages-using-mysql-from-within-terminal-but-password-written/22933056#22933056

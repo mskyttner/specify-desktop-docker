@@ -18,7 +18,7 @@ services:
       - 3306:3306
 
   media:
-    image: dina/media
+    image: dina/assetserver:latest
 
   ui:
     image: dina/specify-desktop:v6
@@ -27,6 +27,8 @@ services:
       - DISPLAY=$DISPLAY
     volumes_from:
       - fs
+#    volumes:
+#      - ./AttachmentStorage:/root/Specify/AttachmentStorage
     links:
       - db
       - media
