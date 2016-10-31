@@ -32,6 +32,15 @@ The db dump takes a while to load, patience please! In other words, the initial 
 
 In Specify6, on the first run use "demouser", "demouser" for user/pass credentials and a schema upgrade will run which takes some time, patience please!
 
+## Settings
+
+Specify stores some settings in local files, such as:
+
+	- /root/Specify/user.properties
+	- # find / -name "*.xml" | grep Specify | grep pref
+	- /usr/local/Specify/config/prefs_init.xml
+	- # it appears USE_GLOBAL_PREFS true -> stores settings in db, not sure in which table
+
 ## TODO
 
 - Add database dump and load to Makefile
