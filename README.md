@@ -41,6 +41,10 @@ Specify stores some settings in local files, such as:
 	- /usr/local/Specify/config/prefs_init.xml
 	- # it appears USE_GLOBAL_PREFS true -> stores settings in db, not sure in which table
 
+The user.properties needs to be updated with minimal settings that can be used on the initial run.
+
+Perhaps the USE_GLOBAL_PREFS can be put in there?
+
 ## TODO
 
 - Add database dump and load to Makefile
