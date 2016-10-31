@@ -31,11 +31,10 @@ init:
 build:
 	@docker build --tag $(NAME) .
 
-debug:
+debug-ui:
 	xhost +local:
-	docker run --rm -it \
-		-v $(XSOCK):$(XSOCK) -e DISPLAY=$${DISPLAY} \
-		dina/specify-desktop:v6
+	docker exec -it \
+		specifydesktopdocker_ui_1 bash
 
 up:
 	@echo "Launching services"
