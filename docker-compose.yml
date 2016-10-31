@@ -19,6 +19,8 @@ services:
 
   media:
     image: dina/assetserver:latest
+    volumes:
+      - ./AttachmentStorage:/root/Specify/AttachmentStorage
 
   ui:
     image: dina/specify-desktop:v6
@@ -27,8 +29,9 @@ services:
       - DISPLAY=$DISPLAY
     volumes_from:
       - fs
-#    volumes:
-#      - ./AttachmentStorage:/root/Specify/AttachmentStorage
+    volumes:
+      - ./user.properties:/root/Specify/user.properties
+      - ./AttachmentStorage:/root/Specify/AttachmentStorage
     links:
       - db
       - media
